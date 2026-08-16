@@ -1,7 +1,7 @@
 import { title } from "process";
 import * as Transaction from "../domain/transaction";
 
-class inMemoryTransactionRepository {
+export class inMemoryTransactionRepository {
     private transactions: Transaction.Transaction[]= [];
     
 
