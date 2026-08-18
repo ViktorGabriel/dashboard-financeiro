@@ -5,7 +5,7 @@ export class CreateTransactionUseCase {
     constructor(private repository: inMemoryTransactionRepository) { }
 
     execute(dto: CreateTransactionDTO) {
-       if (dto.description.trim()) {
+       if (!dto.description.trim()) {
             throw new Error("Descrição não pode ser vazia!")
        }
 

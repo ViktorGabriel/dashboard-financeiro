@@ -1,11 +1,10 @@
-import { title } from "process";
 import * as Transaction from "../domain/transaction";
 
 export class inMemoryTransactionRepository {
     private transactions: Transaction.Transaction[]= [];
     
 
-    async create(transaction: Transaction.CreateTransactionDTO) {
+    create(transaction: Transaction.CreateTransactionDTO) {
         
         const newTransaction = {
             id: crypto.randomUUID(),
@@ -20,11 +19,11 @@ export class inMemoryTransactionRepository {
         return newTransaction
         
     }
-    async findAll() {
+    findAll() {
         return [...this.transactions]
     }
 
-    async getSummary() {
+    getSummary() {
         let incomes = 0;
         let expenses = 0;
 
@@ -35,6 +34,8 @@ export class inMemoryTransactionRepository {
                 expenses += transaction.amount
             }
         }
+
+        return { incomes, expenses, balance: incomes - expenses };
     }
     
    
