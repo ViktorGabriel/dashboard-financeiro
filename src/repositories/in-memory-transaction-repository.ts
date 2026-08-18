@@ -12,9 +12,7 @@ export class inMemoryTransactionRepository {
             title:transaction.description,
             amount: transaction.amount,
             type:transaction.type,
-            createdAt:new Date()
-            
-           
+            createdAt:new Date()          
                 
         }
        
