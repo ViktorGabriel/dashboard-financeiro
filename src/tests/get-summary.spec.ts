@@ -1,7 +1,7 @@
 import { describe, it,expect,beforeEach } from "vitest";
 import { inMemoryTransactionRepository } from "../repositories/in-memory-transaction-repository"; 
 import { CreateTransactionUseCase } from "../use-cases/create-transaction";
-import GetSummaryUseCase from "../use-cases/get-summary";
+import { GetSummaryUseCase } from "../use-cases/get-summary";
 
 describe('Financial Dashboard - Use Case',() =>{
     let repository:inMemoryTransactionRepository;
@@ -14,31 +14,31 @@ describe('Financial Dashboard - Use Case',() =>{
         getSummaryUseCase = new GetSummaryUseCase(repository)
     });
 
-    it('deve calcular o resumo financeiro com receitas e despesas corretamente', () => {
-        createTransactionUseCase.execute({ description: 'Salário', amount: 10000, type: 'INCOME' });
-        createTransactionUseCase.execute({ description: 'Mercado', amount: 3000, type: 'EXPENSE' });
+    it('deve calcular o resumo financeiro com receitas e despesas corretamente', async () => {
+        await createTransactionUseCase.execute({ description: 'Salário', amount: 10000, type: 'INCOME' });
+        await createTransactionUseCase.execute({ description: 'Mercado', amount: 3000, type: 'EXPENSE' });
 
-        const summary = getSummaryUseCase.execute();
+        const summary = await getSummaryUseCase.execute();
         expect(summary.incomes).toBe(10000);
         expect(summary.expenses).toBe(3000);
         expect(summary.balance).toBe(7000);
     });
 
-    it('não deve permitir criar transação com valor menor ou igual a zero', ()=>{
-        expect(()=>{
-            createTransactionUseCase.execute({description: 'Invalido', amount: 0, type:'INCOME'});
-        }).toThrow('Valor deve ser maior que 0!')
+    it('não deve permitir criar transação com valor menor ou igual a zero', async () => {
+        await expect(
+            createTransactionUseCase.execute({ description: 'Invalido', amount: 0, type: 'INCOME' })
+        ).rejects.toThrow('Valor deve ser maior que 0!');
     });
 
-    it('não deve permitir criar transação com valor não inteiro', () => {
-        expect(()=>{
-            createTransactionUseCase.execute({description: 'Invalido', amount: 10.5, type:'INCOME'})
-        }).toThrow('O valor deve ser um número inteiro em centavos.')
-    })
+    it('não deve permitir criar transação com valor não inteiro', async () => {
+        await expect(
+            createTransactionUseCase.execute({ description: 'Invalido', amount: 10.5, type: 'INCOME' })
+        ).rejects.toThrow('O valor deve ser um número inteiro em centavos.');
+    });
 
-    it('não deve permitir criar transação com descrição vazia',()=>{
-        expect(()=>{
-            createTransactionUseCase.execute({description: ' ',amount:1000,type:'INCOME'})
-        }).toThrow('Descrição não pode ser vazia!')
-    }) 
+    it('não deve permitir criar transação com descrição vazia', async () => {
+        await expect(
+            createTransactionUseCase.execute({ description: ' ', amount: 1000, type: 'INCOME' })
+        ).rejects.toThrow('Descrição não pode ser vazia!');
+    });
 });

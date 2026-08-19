@@ -1,9 +1,9 @@
-import { inMemoryTransactionRepository } from "../repositories/in-memory-transaction-repository";
+import { ITransactionRepository } from "../repositories/transaction-repository";
 
-export default class GetSummaryUseCase {
-    constructor(private repository:inMemoryTransactionRepository) { }
+export class GetSummaryUseCase {
+    constructor(private repository: ITransactionRepository) { }
 
-    execute() {
-        return this.repository.getSummary()
+    async execute() {
+        return await this.repository.getSummary();
     }
 }

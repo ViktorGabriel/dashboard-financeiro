@@ -1,10 +1,11 @@
 import * as Transaction from "../domain/transaction";
+import { ITransactionRepository } from "./transaction-repository";
 
-export class inMemoryTransactionRepository {
+export class inMemoryTransactionRepository implements ITransactionRepository {
     private transactions: Transaction.Transaction[]= [];
     
 
-    create(transaction: Transaction.CreateTransactionDTO) {
+    async create(transaction: Transaction.CreateTransactionDTO) {
         
         const newTransaction = {
             id: crypto.randomUUID(),
@@ -19,11 +20,11 @@ export class inMemoryTransactionRepository {
         return newTransaction
         
     }
-    findAll() {
+    async findAll() {
         return [...this.transactions]
     }
 
-    getSummary() {
+    async getSummary() {
         let incomes = 0;
         let expenses = 0;
 

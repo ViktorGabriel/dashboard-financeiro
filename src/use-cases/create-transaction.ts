@@ -1,10 +1,10 @@
 import { CreateTransactionDTO, Transaction } from "../domain/transaction"
-import { inMemoryTransactionRepository } from "../repositories/in-memory-transaction-repository";
+import { ITransactionRepository } from "../repositories/transaction-repository";
 
 export class CreateTransactionUseCase {
-    constructor(private repository: inMemoryTransactionRepository) { }
+    constructor(private repository: ITransactionRepository) { }
 
-    execute(dto: CreateTransactionDTO) {
+    async execute(dto: CreateTransactionDTO): Promise<Transaction> {
        if (!dto.description.trim()) {
             throw new Error("Descrição não pode ser vazia!")
        }
@@ -17,7 +17,7 @@ export class CreateTransactionUseCase {
         throw new Error("O valor deve ser um número inteiro em centavos.")
        }
 
-       const transaction = this.repository.create(dto)
+       const transaction = await this.repository.create(dto)
 
        return transaction
     }
