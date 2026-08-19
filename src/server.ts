@@ -1,13 +1,13 @@
 import express, { Request, Response } from "express";
-import { inMemoryTransactionRepository } from "./repositories/in-memory-transaction-repository";
-import { CreateTransactionDTO, Transaction } from "./domain/transaction"
 import { GetSummaryUseCase } from "./use-cases/get-summary"
 import { CreateTransactionUseCase } from "./use-cases/create-transaction";
+import { PrismaTransactionRepository } from "./repositories/prisma-transaction-repository";
+
 
 const app = express();
 app.use(express.json());
 
-const repository = new inMemoryTransactionRepository()
+const repository = new PrismaTransactionRepository()
 
 const createTransactionUseCase = new CreateTransactionUseCase(repository)
 
