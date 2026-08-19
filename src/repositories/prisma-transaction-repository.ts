@@ -1,8 +1,10 @@
 import { PrismaClient } from '../generated/prisma/client';
+import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 import { ITransactionRepository } from './transaction-repository';
 import { Transaction, CreateTransactionDTO, TransactionType } from '../domain/transaction';
 
-const prisma = new PrismaClient();
+const adapter = new PrismaBetterSqlite3({ url: process.env.DATABASE_URL || 'file:./dev.db' });
+const prisma = new PrismaClient({ adapter });
 
 export class PrismaTransactionRepository implements ITransactionRepository {
     async create(dto: CreateTransactionDTO): Promise<Transaction> {
