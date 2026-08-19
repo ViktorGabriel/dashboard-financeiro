@@ -23,4 +23,22 @@ describe('Financial Dashboard - Use Case',() =>{
         expect(summary.expenses).toBe(3000);
         expect(summary.balance).toBe(7000);
     });
+
+    it('não deve permitir criar transação com valor menor ou igual a zero', ()=>{
+        expect(()=>{
+            createTransactionUseCase.execute({description: 'Invalido', amount: 0, type:'INCOME'});
+        }).toThrow('Valor deve ser maior que 0!')
+    });
+
+    it('não deve permitir criar transação com valor não inteiro', () => {
+        expect(()=>{
+            createTransactionUseCase.execute({description: 'Invalido', amount: 10.5, type:'INCOME'})
+        }).toThrow('O valor deve ser um número inteiro em centavos.')
+    })
+
+    it('não deve permitir criar transação com descrição vazia',()=>{
+        expect(()=>{
+            createTransactionUseCase.execute({description: ' ',amount:1000,type:'INCOME'})
+        }).toThrow('Descrição não pode ser vazia!')
+    }) 
 });
