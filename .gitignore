@@ -1,1 +1,14 @@
 node_modules/
+
+/src/generated/prisma
+
+# SQLite databases
+*.db
+*.db-journal
+dev.db
+
+# Agent skills artifacts
+.agents/
+.claude/
+.windsurf/
+skills-lock.json
