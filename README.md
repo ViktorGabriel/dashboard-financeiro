@@ -16,25 +16,42 @@ Uma aplicação **Fullstack moderna e de alto padrão para gestão e inteligênc
 
 ---
 
-## 📸 Demonstração Visual (Screenshots Reais)
+## 📸 Demonstração Visual (Light & Dark Mode)
 
 <div align="center">
 
-### 🌟 Dashboard Principal (Visão Geral, Gráficos & Transações)
-![Dashboard Preview](docs/screenshots/dashboard.png)
+### 🌟 Dashboard Principal — Modo Escuro (Dark Mode)
+![Dashboard Dark Mode](docs/screenshots/dashboard-dark.png)
 
 <br />
 
-### 🔐 Autenticação & Cadastro
+### ☀️ Dashboard Principal — Modo Claro (Light Mode)
+![Dashboard Light Mode](docs/screenshots/dashboard-light.png)
+
+<br />
+
+### 🔐 Autenticação & Cadastro (Modo Escuro & Modo Claro)
+
 <p align="center">
-  <img src="docs/screenshots/login.png" alt="Login Preview" width="48%" />
+  <b>Login (Dark Mode)</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Login (Light Mode)</b>
+  <br />
+  <img src="docs/screenshots/login-dark.png" alt="Login Dark Mode" width="48%" />
   &nbsp;
-  <img src="docs/screenshots/register.png" alt="Cadastro Preview" width="48%" />
+  <img src="docs/screenshots/login-light.png" alt="Login Light Mode" width="48%" />
+</p>
+
+<p align="center">
+  <b>Cadastro (Dark Mode)</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Cadastro (Light Mode)</b>
+  <br />
+  <img src="docs/screenshots/register-dark.png" alt="Cadastro Dark Mode" width="48%" />
+  &nbsp;
+  <img src="docs/screenshots/register-light.png" alt="Cadastro Light Mode" width="48%" />
 </p>
 
 </div>
 
 ---
+
 
 
 ## ✨ Principais Funcionalidades
