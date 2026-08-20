@@ -8,18 +8,17 @@ export interface Transaction {
     createdAt: Date;
     category: string;
 }
+
 export interface CreateTransactionDTO {
     description: string;
     amount: number;
     type: TransactionType;
-    category?: string;
+    category: string;
 }
 
 export interface FilterTransactionsDTO {
     type?: TransactionType;
     category?: string;
-    startDate?: Date | string;
-    endDate?: Date | string;
+    startDate?: Date;
+    endDate?: Date;
 }
-
-export type FilterTransactionsTDO = FilterTransactionsDTO;
