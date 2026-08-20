@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import cors from "cors";
 import { GetSummaryUseCase } from "./use-cases/get-summary";
 import { CreateTransactionUseCase } from "./use-cases/create-transaction";
 import { GetCashFlowUseCase } from "./use-cases/get-cash-flow";
@@ -10,6 +11,7 @@ import { PrismaUserRepository } from "./repositories/prisma-user-repository";
 import { ensureAuthenticated } from "./middlewares/ensure-authenticated";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const transactionRepository = new PrismaTransactionRepository();
