@@ -7,6 +7,7 @@ export interface Transaction {
     type: TransactionType;
     createdAt: Date;
     category: string;
+    userId: string;
 }
 
 export interface CreateTransactionDTO {
@@ -14,6 +15,7 @@ export interface CreateTransactionDTO {
     amount: number;
     type: TransactionType;
     category: string;
+    userId: string;
 }
 
 export interface FilterTransactionsDTO {
@@ -21,4 +23,5 @@ export interface FilterTransactionsDTO {
     category?: string;
     startDate?: Date;
     endDate?: Date;
+    userId?: string;
 }

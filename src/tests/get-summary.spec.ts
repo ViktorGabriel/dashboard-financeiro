@@ -15,8 +15,8 @@ describe('Financial Dashboard - Use Case',() =>{
     });
 
     it('deve calcular o resumo financeiro com receitas e despesas corretamente', async () => {
-        await createTransactionUseCase.execute({ description: 'Salário', amount: 10000, type: 'INCOME', category: 'Salário' });
-        await createTransactionUseCase.execute({ description: 'Mercado', amount: 3000, type: 'EXPENSE', category: 'Alimentação' });
+        await createTransactionUseCase.execute({ description: 'Salário', amount: 10000, type: 'INCOME', category: 'Salário', userId: 'user-1' });
+        await createTransactionUseCase.execute({ description: 'Mercado', amount: 3000, type: 'EXPENSE', category: 'Alimentação', userId: 'user-1' });
 
         const summary = await getSummaryUseCase.execute();
         expect(summary.incomes).toBe(10000);
@@ -26,19 +26,19 @@ describe('Financial Dashboard - Use Case',() =>{
 
     it('não deve permitir criar transação com valor menor ou igual a zero', async () => {
         await expect(
-            createTransactionUseCase.execute({ description: 'Invalido', amount: 0, type: 'INCOME', category: 'Geral' })
+            createTransactionUseCase.execute({ description: 'Invalido', amount: 0, type: 'INCOME', category: 'Geral', userId: 'user-1' })
         ).rejects.toThrow('Valor deve ser maior que 0!');
     });
 
     it('não deve permitir criar transação com valor não inteiro', async () => {
         await expect(
-            createTransactionUseCase.execute({ description: 'Invalido', amount: 10.5, type: 'INCOME', category: 'Geral' })
+            createTransactionUseCase.execute({ description: 'Invalido', amount: 10.5, type: 'INCOME', category: 'Geral', userId: 'user-1' })
         ).rejects.toThrow('O valor deve ser um número inteiro em centavos.');
     });
 
     it('não deve permitir criar transação com descrição vazia', async () => {
         await expect(
-            createTransactionUseCase.execute({ description: ' ', amount: 1000, type: 'INCOME', category: 'Geral' })
+            createTransactionUseCase.execute({ description: ' ', amount: 1000, type: 'INCOME', category: 'Geral', userId: 'user-1' })
         ).rejects.toThrow('Descrição não pode ser vazia!');
     });
 });

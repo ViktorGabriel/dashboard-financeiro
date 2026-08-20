@@ -11,6 +11,7 @@ export class inMemoryTransactionRepository implements ITransactionRepository {
             amount: dto.amount,
             type: dto.type,
             category: dto.category,
+            userId: dto.userId,
             createdAt: new Date(),
         };
 
@@ -21,6 +22,9 @@ export class inMemoryTransactionRepository implements ITransactionRepository {
     async findAll(filter?: FilterTransactionsDTO) {
         let result = [...this.transactions];
 
+        if (filter?.userId) {
+            result = result.filter(t => t.userId === filter.userId);
+        }
         if (filter?.type) {
             result = result.filter(t => t.type === filter.type);
         }

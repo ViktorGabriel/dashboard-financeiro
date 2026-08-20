@@ -12,11 +12,22 @@ datasource db {
   provider = "sqlite"
 }
 
+model User {
+  id           String        @id @default(uuid())
+  name         String
+  email        String        @unique
+  password     String
+  createdAt    DateTime      @default(now())
+  transactions Transaction[]
+}
+
 model Transaction {
   id          String   @id @default(uuid())
   description String
   amount      Int
   type        String
-  category    String @default("Geral")
+  category    String   @default("Geral")
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
 }

@@ -14,6 +14,7 @@ export class PrismaTransactionRepository implements ITransactionRepository {
                 amount: dto.amount,
                 type: dto.type,
                 category: dto.category,
+                userId: dto.userId,
             },
         });
 
@@ -23,12 +24,17 @@ export class PrismaTransactionRepository implements ITransactionRepository {
             amount: transaction.amount,
             type: transaction.type as TransactionType,
             category: transaction.category,
+            userId: transaction.userId,
             createdAt: transaction.createdAt,
         };
     }
 
     async findAll(filter?: FilterTransactionsDTO): Promise<Transaction[]> {
         const where: any = {};
+
+        if (filter?.userId) {
+            where.userId = filter.userId;
+        }
 
         if (filter?.type) {
             where.type = filter.type;
@@ -56,6 +62,7 @@ export class PrismaTransactionRepository implements ITransactionRepository {
             amount: t.amount,
             type: t.type as TransactionType,
             category: t.category,
+            userId: t.userId,
             createdAt: t.createdAt,
         }));
     }
