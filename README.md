@@ -16,21 +16,26 @@ Uma aplicação **Fullstack moderna e de alto padrão para gestão e inteligênc
 
 ---
 
-## 📸 Demonstração Visual (Screenshots)
+## 📸 Demonstração Visual (Screenshots Reais)
 
 <div align="center">
 
-### 🌟 Dashboard Principal (Visão Geral & Métricas)
-![Dashboard Preview](docs/screenshots/dashboard-preview.jpg)
+### 🌟 Dashboard Principal (Visão Geral, Gráficos & Transações)
+![Dashboard Preview](docs/screenshots/dashboard.png)
 
 <br />
 
 ### 🔐 Autenticação & Cadastro
-![Login Preview](docs/screenshots/login-preview.jpg)
+<p align="center">
+  <img src="docs/screenshots/login.png" alt="Login Preview" width="48%" />
+  &nbsp;
+  <img src="docs/screenshots/register.png" alt="Cadastro Preview" width="48%" />
+</p>
 
 </div>
 
 ---
+
 
 ## ✨ Principais Funcionalidades
 
