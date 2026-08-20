@@ -1,33 +1,36 @@
 import express, { Request, Response } from "express";
-import { GetSummaryUseCase } from "./use-cases/get-summary"
+import { GetSummaryUseCase } from "./use-cases/get-summary";
 import { CreateTransactionUseCase } from "./use-cases/create-transaction";
+import { GetCashFlowUseCase } from "./use-cases/get-cash-flow";
+import { GetCategoryBreakdownUseCase } from "./use-cases/get-category-breakdown";
 import { PrismaTransactionRepository } from "./repositories/prisma-transaction-repository";
 
 
 const app = express();
 app.use(express.json());
 
-const repository = new PrismaTransactionRepository()
+const repository = new PrismaTransactionRepository();
 
-const createTransactionUseCase = new CreateTransactionUseCase(repository)
-
-const getSummaryUseCase = new GetSummaryUseCase(repository)
+const createTransactionUseCase = new CreateTransactionUseCase(repository);
+const getSummaryUseCase = new GetSummaryUseCase(repository);
+const getCashFlowUseCase = new GetCashFlowUseCase(repository);
+const getCategoryBreakdownUseCase = new GetCategoryBreakdownUseCase(repository);
 
 app.post('/transactions', async (req: Request, res: Response) => {
     try {
-        const transaction = await createTransactionUseCase.execute(req.body)
-        return res.status(201).json(transaction)
+        const transaction = await createTransactionUseCase.execute(req.body);
+        return res.status(201).json(transaction);
     } catch (error: any) {
-        return res.status(400).json({ message: error.message })
+        return res.status(400).json({ message: error.message });
     }
 });
 
 app.get('/summary', async (req: Request, res: Response) => {
     try {
-        const summary = await getSummaryUseCase.execute()
-        return res.status(200).json(summary)
+        const summary = await getSummaryUseCase.execute();
+        return res.status(200).json(summary);
     } catch (error: any) {
-        return res.status(500).json({ message: error.message })
+        return res.status(500).json({ message: error.message });
     }
 });
 
@@ -49,9 +52,26 @@ app.get('/transactions', async (req: Request, res: Response) => {
     }
 });
 
+app.get('/dashboard/cash-flow', async (req: Request, res: Response) => {
+    try {
+        const result = await getCashFlowUseCase.execute(req.query as any);
+        return res.status(200).json(result);
+    } catch (error: any) {
+        return res.status(500).json({ message: error.message });
+    }
+});
+
+app.get('/dashboard/categories', async (req: Request, res: Response) => {
+    try {
+        const result = await getCategoryBreakdownUseCase.execute(req.query as any);
+        return res.status(200).json(result);
+    } catch (error: any) {
+        return res.status(500).json({ message: error.message });
+    }
+});
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+    console.log(`Server running on port ${PORT}`);
 });
