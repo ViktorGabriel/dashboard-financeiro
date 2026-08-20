@@ -1,16 +1,16 @@
-import * as Transaction from "../domain/transaction";
+import { CreateTransactionDTO, FilterTransactionsDTO, Transaction } from "../domain/transaction";
 import { ITransactionRepository } from "./transaction-repository";
 
 export class inMemoryTransactionRepository implements ITransactionRepository {
-    private transactions: Transaction.Transaction[] = [];
+    private transactions: Transaction[] = [];
 
-    async create(transaction: Transaction.CreateTransactionDTO) {
-        const newTransaction: Transaction.Transaction = {
+    async create(dto: CreateTransactionDTO) {
+        const newTransaction: Transaction = {
             id: crypto.randomUUID(),
-            title: transaction.description,
-            amount: transaction.amount,
-            type: transaction.type,
-            category: transaction.category || "Geral",
+            title: dto.description,
+            amount: dto.amount,
+            type: dto.type,
+            category: dto.category,
             createdAt: new Date(),
         };
 
@@ -18,24 +18,20 @@ export class inMemoryTransactionRepository implements ITransactionRepository {
         return newTransaction;
     }
 
-    async findAll(filters?: Transaction.FilterTransactionsDTO) {
+    async findAll(filter?: FilterTransactionsDTO) {
         let result = [...this.transactions];
 
-        if (filters) {
-            if (filters.type) {
-                result = result.filter((t) => t.type === filters.type);
-            }
-            if (filters.category) {
-                result = result.filter((t) => t.category === filters.category);
-            }
-            if (filters.startDate) {
-                const start = new Date(filters.startDate);
-                result = result.filter((t) => new Date(t.createdAt) >= start);
-            }
-            if (filters.endDate) {
-                const end = new Date(filters.endDate);
-                result = result.filter((t) => new Date(t.createdAt) <= end);
-            }
+        if (filter?.type) {
+            result = result.filter(t => t.type === filter.type);
+        }
+        if (filter?.category) {
+            result = result.filter(t => t.category.toLowerCase() === filter.category!.toLowerCase());
+        }
+        if (filter?.startDate) {
+            result = result.filter(t => t.createdAt >= filter.startDate!);
+        }
+        if (filter?.endDate) {
+            result = result.filter(t => t.createdAt <= filter.endDate!);
         }
 
         return result;
@@ -56,5 +52,3 @@ export class inMemoryTransactionRepository implements ITransactionRepository {
         return { incomes, expenses, balance: incomes - expenses };
     }
 }
-
-

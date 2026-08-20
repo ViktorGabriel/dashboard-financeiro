@@ -13,7 +13,7 @@ export class PrismaTransactionRepository implements ITransactionRepository {
                 description: dto.description,
                 amount: dto.amount,
                 type: dto.type,
-                category: dto.category || 'Geral',
+                category: dto.category,
             },
         });
 
@@ -27,30 +27,28 @@ export class PrismaTransactionRepository implements ITransactionRepository {
         };
     }
 
-    async findAll(filters?: FilterTransactionsDTO): Promise<Transaction[]> {
+    async findAll(filter?: FilterTransactionsDTO): Promise<Transaction[]> {
         const where: any = {};
 
-        if (filters) {
-            if (filters.type) {
-                where.type = filters.type;
+        if (filter?.type) {
+            where.type = filter.type;
+        }
+
+        if (filter?.category) {
+            where.category = filter.category;
+        }
+
+        if (filter?.startDate || filter?.endDate) {
+            where.createdAt = {};
+            if (filter.startDate) {
+                where.createdAt.gte = filter.startDate;
             }
-            if (filters.category) {
-                where.category = filters.category;
-            }
-            if (filters.startDate || filters.endDate) {
-                where.createdAt = {};
-                if (filters.startDate) {
-                    where.createdAt.gte = new Date(filters.startDate);
-                }
-                if (filters.endDate) {
-                    where.createdAt.lte = new Date(filters.endDate);
-                }
+            if (filter.endDate) {
+                where.createdAt.lte = filter.endDate;
             }
         }
 
-        const transactions = await prisma.transaction.findMany({
-            where: Object.keys(where).length > 0 ? where : undefined,
-        });
+        const transactions = await prisma.transaction.findMany({ where });
 
         return transactions.map((t) => ({
             id: t.id,
@@ -61,6 +59,7 @@ export class PrismaTransactionRepository implements ITransactionRepository {
             createdAt: t.createdAt,
         }));
     }
+
 
     async getSummary(): Promise<{ incomes: number; expenses: number; balance: number }> {
         const transactions = await prisma.transaction.findMany();

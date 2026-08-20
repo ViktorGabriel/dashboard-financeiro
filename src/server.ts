@@ -33,12 +33,22 @@ app.get('/summary', async (req: Request, res: Response) => {
 
 app.get('/transactions', async (req: Request, res: Response) => {
     try {
-        const transactions = await repository.findAll(req.query as any)
-        return res.status(200).json(transactions)
+        const { type, category, startDate, endDate } = req.query;
+
+        const filters = {
+            type: type ? (type as any) : undefined,
+            category: category ? (category as string) : undefined,
+            startDate: startDate ? new Date(startDate as string) : undefined,
+            endDate: endDate ? new Date(endDate as string) : undefined,
+        };
+
+        const transactions = await repository.findAll(filters);
+        return res.status(200).json(transactions);
     } catch (error: any) {
-        return res.status(500).json({ message: error.message })
+        return res.status(500).json({ message: error.message });
     }
 });
+
 
 const PORT = process.env.PORT || 3000;
 
