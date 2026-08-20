@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   * {
     box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: light dark;
   }
 
   body {
@@ -12,6 +18,12 @@
     color: #0f172a;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html.dark body {
+    background-color: #020617;
+    color: #f8fafc;
   }
 }
 
