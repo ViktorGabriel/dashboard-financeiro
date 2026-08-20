@@ -1,5 +1,9 @@
-# 📊 Dashboard Financeiro API
+# 📊 Dashboard Financeiro - Fullstack Application
 
+[![React](https://img.shields.io/badge/React-19.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Recharts](https://img.shields.io/badge/Recharts-Analytics-22b5bf?style=for-the-badge)](https://recharts.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-v20+-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-v5.9+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Express](https://img.shields.io/badge/Express-v5.2+-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
@@ -8,31 +12,62 @@
 [![JWT](https://img.shields.io/badge/JWT-Authentication-black?style=for-the-badge&logo=json-web-tokens)](https://jwt.io/)
 [![Vitest](https://img.shields.io/badge/Vitest-Testing-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
 
-Uma API RESTful robusta e escalável para **gestão e análise financeira pessoal e empresarial**. A aplicação resolve o problema do controle desorganizado de receitas e despesas através de autenticação segura JWT, isolamento de dados multi-usuário, persistência com Prisma ORM e SQLite, filtros dinâmicos e relatórios analíticos avançados de fluxo de caixa e distribuição percentual por categorias.
+Uma aplicação **Fullstack completa e moderna para gestão e análise financeira pessoal e empresarial**. O projeto resolve a complexidade no controle financeiro oferecendo uma interface interativa e responsiva em **React SPA**, acompanhada de uma **API RESTful** segura construída sob os princípios de **Clean Architecture**, com autenticação JWT, persistência relacional com **Prisma ORM** e **SQLite**, métricas de fluxo de caixa e distribuição percentual por categorias com **Recharts**.
+
+---
+
+## ✨ Principais Funcionalidades
+
+### 💻 Frontend (React + Vite + Tailwind CSS)
+- **🔐 Autenticação Completa**: Telas de Login e Cadastro de usuário com validação e persistência do token JWT no `localStorage`.
+- **📊 Dashboard Interativo**:
+  - **Cards de Resumo**: Saldo Atual, Total de Receitas e Total de Despesas em tempo real.
+  - **Gráfico de Fluxo de Caixa Mensal (BarChart)**: Comparativo mês a mês de receitas vs despesas.
+  - **Gráfico de Distribuição por Categoria (DonutChart)**: Percentual de gastos por categoria com tooltips e legendas dinâmicas.
+- **💳 Tabela de Transações**:
+  - Listagem paginada e categorizada com badges de status.
+  - Filtros dinâmicos simultâneos por **Tipo** (Receita/Despesa) e **Categoria**.
+- **➕ Modal de Nova Transação**: Criação rápida de receitas ou despesas com alternador de tipo e conversão automática de valores.
+- **🎨 Design Moderno e Responsivo**: Desenvolvido com Tailwind CSS v4 e ícones da biblioteca Lucide React.
+
+### ⚙️ Backend (Node.js + Express + Prisma)
+- **🛡️ Segurança e Multi-usuário**: Hash seguro de senhas com **Bcryptjs**, autenticação stateless com **JWT** e isolamento estrito de dados por `userId`.
+- **🗄️ Persistência Relacional**: Modelagem e migrações relacionais com **Prisma ORM** e adapter de alto desempenho **better-sqlite3**.
+- **🎯 Regras de Negócio Isoladas**: Casos de uso (Use Cases) desacoplados da camada HTTP e de infraestrutura.
+- **🌐 Suporte a CORS**: Integração nativa habilitada para comunicação segura com o frontend.
+- **🧪 Testes Unitários**: Cobertura das regras de validação e cálculos com **Vitest**.
 
 ---
 
 ## 🚀 Tecnologias Utilizadas
 
-- **[Node.js](https://nodejs.org/)**: Ambiente de execução JavaScript server-side.
-- **[TypeScript](https://www.typescriptlang.org/)**: Superset tipado para maior confiabilidade, produtividade e manutenibilidade do código.
-- **[Express](https://expressjs.com/)**: Framework web minimalista e flexível para criação de rotas e middlewares.
-- **[Prisma ORM](https://www.prisma.io/)**: ORM de última geração para modelagem, migração e consultas seguras ao banco de dados.
-- **[SQLite](https://www.sqlite.org/) & [Better-SQLite3](https://github.com/WiseLibs/better-sqlite3)**: Banco de dados relacional leve e embutido com alta performance via driver adapter.
-- **[Bcryptjs](https://github.com/dcodeIO/bcrypt.js)**: Hash criptográfico seguro de senhas com algoritmo salt/rounds.
-- **[JSON Web Tokens (JWT)](https://jwt.io/)**: Geração e validação de tokens para autenticação stateless.
-- **[Vitest](https://vitest.dev/)**: Framework ultrarrápido para testes unitários.
-- **[TSX](https://github.com/privatenumber/tsx)** & **[tsup](https://tsup.egoist.dev/)**: Execução em desenvolvimento com hot-reload e build otimizado para produção.
+### Frontend
+- **[React](https://react.dev/)**: Biblioteca componentizada para interface de usuário reativa.
+- **[Vite](https://vitejs.dev/)**: Bundler moderno e ambiente de desenvolvimento ultrarrápido.
+- **[Tailwind CSS](https://tailwindcss.com/) (v4)**: Framework de estilização utilitário de alta performance.
+- **[Recharts](https://recharts.org/)**: Biblioteca declarativa de gráficos para visualização de dados financeiros.
+- **[Lucide React](https://lucide.dev/)**: Coleção de ícones vetoriais modernos.
+- **[Axios](https://axios-http.com/)**: Cliente HTTP com interceptors automáticos de Bearer Token.
+
+### Backend
+- **[Node.js](https://nodejs.org/)** & **[TypeScript](https://www.typescriptlang.org/)**: Runtime e tipagem estática ponta a ponta.
+- **[Express](https://expressjs.com/)**: Framework web para roteamento e middlewares.
+- **[Prisma ORM](https://www.prisma.io/)**: Mapeamento objeto-relacional tipado e migrações.
+- **[SQLite](https://www.sqlite.org/) & [Better-SQLite3](https://github.com/WiseLibs/better-sqlite3)**: Banco de dados relacional leve e performático.
+- **[Bcryptjs](https://github.com/dcodeIO/bcrypt.js)**: Criptografia e hashing seguro de senhas.
+- **[JSON Web Tokens (JWT)](https://jwt.io/)**: Emissão e validação de tokens de acesso.
+- **[CORS](https://github.com/expressjs/cors)**: Middleware para Cross-Origin Resource Sharing.
+- **[Vitest](https://vitest.dev/)**: Testes unitários com feedback instantâneo.
 
 ---
 
 ## 📋 Pré-requisitos
 
-Antes de iniciar, certifique-se de ter instalado em seu ambiente:
+Certifique-se de ter instalado em sua máquina:
 
-- **[Node.js](https://nodejs.org/)** (versão `18.x` ou superior, recomendado `20.x` LTS)
-- **[npm](https://www.npmjs.com/)** (geralmente instalado junto com o Node.js) ou **[yarn](https://yarnpkg.com/)** / **[pnpm](https://pnpm.io/)**
-- **[Git](https://git-scm.com/)** para versionamento de código
+- **[Node.js](https://nodejs.org/)** (`v18.x` ou superior, recomendado `v20.x` LTS)
+- **[npm](https://www.npmjs.com/)** ou **[pnpm](https://pnpm.io/)** / **[yarn](https://yarnpkg.com/)**
+- **[Git](https://git-scm.com/)**
 
 ---
 
@@ -45,47 +80,56 @@ git clone https://github.com/ViktorGabriel/dashboard-financeiro.git
 cd dashboard-financeiro
 ```
 
-### 2. Instalar as dependências
+---
 
+### 2. Configurar e Iniciar o Backend
+
+#### a) Instalar as dependências do backend:
 ```bash
 npm install
 ```
 
-### 3. Configurar variáveis de ambiente
-
-Crie um arquivo `.env` na raiz do projeto (caso não exista):
-
+#### b) Configurar as variáveis de ambiente:
+Crie um arquivo `.env` na raiz do projeto:
 ```env
 PORT=3000
 DATABASE_URL="file:./dev.db"
 JWT_SECRET="sua_chave_secreta_jwt_super_segura"
 ```
 
-### 4. Executar Migrações do Banco de Dados
-
-Gere o Prisma Client e execute as migrações do SQLite:
-
+#### c) Executar as migrações do banco de dados:
 ```bash
 npx prisma migrate dev
 ```
 
-### 5. Iniciar o Servidor
-
-#### Modo de Desenvolvimento (com Watch/Hot-Reload):
+#### d) Iniciar o servidor backend:
 ```bash
+# Modo desenvolvimento com hot-reload:
 npm run start:watch
-```
 
-#### Modo de Desenvolvimento (Execução Única):
-```bash
+# Ou modo desenvolvimento padrão:
 npm run start:dev
 ```
+> O backend iniciará em: `http://localhost:3000`
 
-O servidor iniciará em: `http://localhost:3000`
+---
 
-### 6. Executar Testes Unitários
+### 3. Configurar e Iniciar o Frontend
 
-Para rodar a suíte de testes com o Vitest:
+Abra um **novo terminal** na pasta do projeto:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+> O frontend iniciará em: `http://localhost:5173`
+
+---
+
+### 4. Executar os Testes Unitários
+
+No terminal da raiz do projeto:
 
 ```bash
 npx vitest run
@@ -95,37 +139,61 @@ npx vitest run
 
 ## 📁 Estrutura do Projeto
 
-O projeto segue os princípios de **Clean Architecture** e **Domain-Driven Design (DDD)**, desacoplando regras de negócio, infraestrutura de banco de dados e camada HTTP:
-
 ```text
 dashboard-financeiro/
 ├── prisma/
-│   ├── migrations/             # Histórico de migrações relacionais
-│   └── schema.prisma           # Modelos de dados (User, Transaction)
-├── src/
-│   ├── domain/                 # Entidades, DTOs e Contratos de domínio
-│   │   ├── analytics.ts        # Interfaces para relatórios (CashFlowPoint, CategoryBreakdown)
-│   │   ├── transaction.ts      # Entidade Transaction e DTOs de criação e filtros
-│   │   └── user.ts             # Entidade User e DTOs de autenticação
-│   ├── middlewares/            # Interceptadores HTTP
-│   │   └── ensure-authenticated.ts # Validação de token Bearer JWT
-│   ├── repositories/           # Camada de abstração e acesso a dados
+│   ├── migrations/                     # Histórico de migrações SQL do banco
+│   └── schema.prisma                   # Modelos de dados (User, Transaction)
+│
+├── src/                                # BACKEND (API Express)
+│   ├── domain/                         # Entidades, DTOs e Interfaces de Domínio
+│   │   ├── analytics.ts                # Contratos de CashFlowPoint e CategoryBreakdown
+│   │   ├── transaction.ts              # Entidade Transaction e DTOs de filtro e criação
+│   │   └── user.ts                     # Entidade User e DTOs de autenticação
+│   ├── middlewares/                    # Interceptadores Express
+│   │   └── ensure-authenticated.ts     # Validação de token Bearer JWT e injeção de userId
+│   ├── repositories/                   # Abstração de Acesso a Dados
 │   │   ├── i-transaction-repository.ts
 │   │   ├── transaction-repository.ts
-│   │   ├── in-memory-transaction-repository.ts  # Repositório em memória para testes
-│   │   ├── prisma-transaction-repository.ts     # Repositório persistido com Prisma
+│   │   ├── in-memory-transaction-repository.ts # Repositório mock para testes unitários
+│   │   ├── prisma-transaction-repository.ts    # Repositório persistido com Prisma ORM
 │   │   ├── i-user-repository.ts
 │   │   └── prisma-user-repository.ts
-│   ├── use-cases/              # Casos de uso (Regras de Negócio da aplicação)
-│   │   ├── authenticate-user.ts       # Login e geração de JWT
-│   │   ├── create-transaction.ts      # Validação e criação de transações
-│   │   ├── get-cash-flow.ts           # Agrupamento temporal de fluxo de caixa
-│   │   ├── get-category-breakdown.ts  # Agrupamento e cálculo percentual por categoria
-│   │   ├── get-summary.ts             # Resumo consolidado (receitas, despesas, saldo)
-│   │   └── register-user.ts           # Registro de novo usuário com hash de senha
-│   ├── tests/                  # Testes unitários com Vitest
+│   ├── use-cases/                      # Regras de Negócio da Aplicação
+│   │   ├── authenticate-user.ts        # Validação de credenciais e geração de JWT
+│   │   ├── create-transaction.ts       # Validações financeiras e criação de transação
+│   │   ├── get-cash-flow.ts            # Agrupamento temporal do fluxo de caixa mensal
+│   │   ├── get-category-breakdown.ts   # Cálculo percentual e ordenação por categoria
+│   │   ├── get-summary.ts              # Totalizador consolidado (receitas, despesas, saldo)
+│   │   └── register-user.ts            # Registro de usuário com hashing bcrypt
+│   ├── tests/                          # Testes unitários
 │   │   └── get-summary.spec.ts
-│   └── server.ts               # Ponto de entrada da aplicação e configuração de rotas Express
+│   └── server.ts                       # Setup do Express, middlewares, CORS e rotas
+│
+├── frontend/                           # FRONTEND (React SPA + Vite)
+│   ├── src/
+│   │   ├── components/                 # Componentes Visuais do Dashboard
+│   │   │   ├── Header.tsx              # Barra de navegação com dados do usuário e ações
+│   │   │   ├── SummaryCards.tsx        # Cards de Saldo, Receitas e Despesas
+│   │   │   ├── CashFlowChart.tsx       # Gráfico de barras com Recharts
+│   │   │   ├── CategoryPieChart.tsx    # Gráfico Donut de categorias com Recharts
+│   │   │   ├── TransactionTable.tsx    # Tabela de extrato com filtros interativos
+│   │   │   └── NewTransactionModal.tsx # Modal de criação de transações
+│   │   ├── contexts/
+│   │   │   └── AuthContext.tsx         # Gerenciamento de estado de login, user e token
+│   │   ├── pages/
+│   │   │   ├── Login.tsx               # Tela de Login
+│   │   │   └── Register.tsx            # Tela de Cadastro
+│   │   ├── services/
+│   │   │   └── api.ts                  # Instância Axios com interceptor de autenticação
+│   │   ├── utils/
+│   │   │   └── formatters.ts           # Formatadores de moeda (BRL) e datas (PT-BR)
+│   │   ├── App.tsx                     # Roteamento condicional por autenticação
+│   │   ├── index.css                   # Diretivas e estilizações do Tailwind CSS
+│   │   └── main.tsx                    # Ponto de entrada React
+│   ├── package.json
+│   └── vite.config.ts
+│
 ├── package.json
 ├── tsconfig.json
 └── README.md
@@ -133,30 +201,30 @@ dashboard-financeiro/
 
 ---
 
-## 📖 Guia de Uso da API
+## 📖 Documentação da API REST
 
-> 💡 **Dica sobre valores monetários:** Todos os valores (`amount`, `incomes`, `expenses`, `balance`, `total`) são trafegados e armazenados em **centavos** como números inteiros (ex: R$ 150,00 = `15000`), evitando imprecisões de ponto flutuante.
+> 💡 **Nota sobre valores:** Todos os valores monetários (`amount`, `incomes`, `expenses`, `balance`, `total`) são trafegados e salvos em **centavos** (ex: R$ 250,00 = `25000`) para garantir precisão decimal exata.
 
-### 🔐 1. Autenticação
+### 🔐 1. Autenticação (Rotas Públicas)
 
 #### `POST /auth/register`
 Cadastra um novo usuário no sistema.
 
-**Body (JSON):**
+**Request Body:**
 ```json
 {
-  "name": "Maria Silva",
-  "email": "maria@example.com",
+  "name": "Viktor Gabriel",
+  "email": "viktor@example.com",
   "password": "senhaSegura123"
 }
 ```
 
-**Resposta (201 Created):**
+**Response (201 Created):**
 ```json
 {
   "id": "c8a4d715-e01c-4b95-a226-5b4c1074a3f1",
-  "name": "Maria Silva",
-  "email": "maria@example.com",
+  "name": "Viktor Gabriel",
+  "email": "viktor@example.com",
   "createdAt": "2026-08-20T13:00:00.000Z"
 }
 ```
@@ -164,23 +232,23 @@ Cadastra um novo usuário no sistema.
 ---
 
 #### `POST /auth/login`
-Autentica o usuário e retorna o token JWT para uso nas demais rotas.
+Autentica o usuário e retorna o token JWT de acesso.
 
-**Body (JSON):**
+**Request Body:**
 ```json
 {
-  "email": "maria@example.com",
+  "email": "viktor@example.com",
   "password": "senhaSegura123"
 }
 ```
 
-**Resposta (200 OK):**
+**Response (200 OK):**
 ```json
 {
   "user": {
     "id": "c8a4d715-e01c-4b95-a226-5b4c1074a3f1",
-    "name": "Maria Silva",
-    "email": "maria@example.com",
+    "name": "Viktor Gabriel",
+    "email": "viktor@example.com",
     "createdAt": "2026-08-20T13:00:00.000Z"
   },
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
@@ -189,29 +257,29 @@ Autentica o usuário e retorna o token JWT para uso nas demais rotas.
 
 ---
 
-### 💳 2. Transações (Requer Cabeçalho `Authorization: Bearer <TOKEN>`)
+### 💳 2. Transações (Requer Header `Authorization: Bearer <TOKEN>`)
 
 #### `POST /transactions`
-Cria uma nova transação financeira vinculada ao usuário autenticado.
+Cadastra uma nova transação para o usuário logado.
 
-**Body (JSON):**
+**Request Body:**
 ```json
 {
-  "description": "Supermercado Semanal",
-  "amount": 15000,
-  "type": "EXPENSE",
-  "category": "Alimentação"
+  "description": "Salário Mensal",
+  "amount": 500000,
+  "type": "INCOME",
+  "category": "Salário"
 }
 ```
 
-**Resposta (201 Created):**
+**Response (201 Created):**
 ```json
 {
   "id": "e8d64192-8022-4217-a068-07e155bcbf1e",
-  "title": "Supermercado Semanal",
-  "amount": 15000,
-  "type": "EXPENSE",
-  "category": "Alimentação",
+  "title": "Salário Mensal",
+  "amount": 500000,
+  "type": "INCOME",
+  "category": "Salário",
   "userId": "c8a4d715-e01c-4b95-a226-5b4c1074a3f1",
   "createdAt": "2026-08-20T13:05:00.000Z"
 }
@@ -220,7 +288,7 @@ Cria uma nova transação financeira vinculada ao usuário autenticado.
 ---
 
 #### `GET /transactions`
-Lista transações do usuário com suporte a filtros combináveis na URL query string:
+Lista as transações do usuário logado com suporte a filtros via query params:
 - `?type=INCOME` ou `?type=EXPENSE`
 - `?category=Alimentação`
 - `?startDate=2026-08-01`
@@ -228,21 +296,21 @@ Lista transações do usuário com suporte a filtros combináveis na URL query s
 
 **Exemplo de Requisição:**
 ```http
-GET /transactions?type=EXPENSE&category=Alimentação
+GET /transactions?type=EXPENSE&category=Supermercado
 Authorization: Bearer <TOKEN>
 ```
 
-**Resposta (200 OK):**
+**Response (200 OK):**
 ```json
 [
   {
-    "id": "e8d64192-8022-4217-a068-07e155bcbf1e",
-    "title": "Supermercado Semanal",
-    "amount": 15000,
+    "id": "006341a7-743d-48c0-a178-a2ae8c275996",
+    "title": "Compras do Mês",
+    "amount": 85000,
     "type": "EXPENSE",
-    "category": "Alimentação",
+    "category": "Supermercado",
     "userId": "c8a4d715-e01c-4b95-a226-5b4c1074a3f1",
-    "createdAt": "2026-08-20T13:05:00.000Z"
+    "createdAt": "2026-08-20T14:10:00.000Z"
   }
 ]
 ```
@@ -250,38 +318,38 @@ Authorization: Bearer <TOKEN>
 ---
 
 #### `GET /summary`
-Retorna o resumo financeiro consolidado (total de receitas, despesas e saldo).
+Retorna os totais consolidados de receitas, despesas e saldo do usuário.
 
-**Resposta (200 OK):**
+**Response (200 OK):**
 ```json
 {
   "incomes": 500000,
-  "expenses": 150000,
-  "balance": 350000
+  "expenses": 85000,
+  "balance": 415000
 }
 ```
 
 ---
 
-### 📈 3. Relatórios e Dashboard (Requer Cabeçalho `Authorization: Bearer <TOKEN>`)
+### 📈 3. Dashboard e Analytics (Requer Header `Authorization: Bearer <TOKEN>`)
 
 #### `GET /dashboard/cash-flow`
-Retorna os pontos do fluxo de caixa agrupados cronologicamente por período (ano/mês).
+Retorna dados agregados mês a mês para o gráfico de fluxo de caixa.
 
-**Resposta (200 OK):**
+**Response (200 OK):**
 ```json
 [
   {
     "period": "2026-07",
-    "incomes": 450000,
+    "incomes": 480000,
     "expenses": 120000,
-    "balance": 330000
+    "balance": 360000
   },
   {
     "period": "2026-08",
     "incomes": 500000,
-    "expenses": 150000,
-    "balance": 350000
+    "expenses": 85000,
+    "balance": 415000
   }
 ]
 ```
@@ -291,13 +359,13 @@ Retorna os pontos do fluxo de caixa agrupados cronologicamente por período (ano
 #### `GET /dashboard/categories`
 Retorna a distribuição percentual de despesas por categoria, ordenada do maior gasto para o menor.
 
-**Resposta (200 OK):**
+**Response (200 OK):**
 ```json
 [
   {
-    "category": "Alimentação",
-    "total": 90000,
-    "percentage": 60.0
+    "category": "Supermercado",
+    "total": 85000,
+    "percentage": 56.7
   },
   {
     "category": "Transporte",
@@ -306,8 +374,8 @@ Retorna a distribuição percentual de despesas por categoria, ordenada do maior
   },
   {
     "category": "Lazer",
-    "total": 15000,
-    "percentage": 10.0
+    "total": 20000,
+    "percentage": 13.3
   }
 ]
 ```
@@ -316,22 +384,22 @@ Retorna a distribuição percentual de despesas por categoria, ordenada do maior
 
 ## 🤝 Como Contribuir
 
-Contribuições são super bem-vindas! Siga os passos abaixo para contribuir:
+Contribuições são muito bem-vindas! Siga os passos abaixo:
 
 1. Faça um **Fork** do projeto
-2. Crie uma **Branch** para sua Feature/Fix:
+2. Crie uma **Branch** para sua funcionalidade ou correção:
    ```bash
-   git checkout -b feature/minha-nova-feature
+   git checkout -b feature/minha-nova-funcionalidade
    ```
-3. Realize seus commits seguindo o padrão [Conventional Commits](https://www.conventionalcommits.org/pt-br/):
+3. Faça o commit de suas alterações seguindo o padrão [Conventional Commits](https://www.conventionalcommits.org/pt-br/):
    ```bash
-   git commit -m "feat: adiciona exportacao de relatorios em PDF"
+   git commit -m "feat: adiciona exportacao de relatorio em CSV"
    ```
-4. Envie sua branch para o seu repositório remoto:
+4. Envie sua branch para o repositório remoto:
    ```bash
-   git push origin feature/minha-nova-feature
+   git push origin feature/minha-nova-funcionalidade
    ```
-5. Abra um **Pull Request** detalhando as alterações propostas
+5. Abra um **Pull Request** detalhado
 
 ---
 
@@ -341,4 +409,4 @@ Este projeto está sob a licença [ISC](LICENSE).
 
 ---
 
-Feito com ☕ e dedicação por [Viktor Gabriel](https://github.com/ViktorGabriel).
+Feito com ☕ e código limpo por [Viktor Gabriel](https://github.com/ViktorGabriel).
