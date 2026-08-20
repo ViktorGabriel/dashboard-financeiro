@@ -18,13 +18,13 @@ function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-slate-50/60 text-slate-900 selection:bg-indigo-500 selection:text-white">
       <Header onNewTransaction={() => setShowModal(true)} />
 
-      <main className="max-w-7xl mx-auto px-4 py-6 space-y-6">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         <SummaryCards refreshKey={refreshKey} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <CashFlowChart refreshKey={refreshKey} />
           <CategoryPieChart refreshKey={refreshKey} />
         </div>
