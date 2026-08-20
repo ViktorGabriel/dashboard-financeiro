@@ -6,9 +6,20 @@ export interface Transaction {
     amount: number; // o valor sempre será armazenado em centavos para evitar erros com números decimais
     type: TransactionType;
     createdAt: Date;
+    category: string;
 }
 export interface CreateTransactionDTO {
     description: string;
     amount: number;
     type: TransactionType;
+    category?: string;
 }
+
+export interface FilterTransactionsDTO {
+    type?: TransactionType;
+    category?: string;
+    startDate?: Date | string;
+    endDate?: Date | string;
+}
+
+export type FilterTransactionsTDO = FilterTransactionsDTO;

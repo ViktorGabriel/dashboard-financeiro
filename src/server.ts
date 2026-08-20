@@ -33,7 +33,7 @@ app.get('/summary', async (req: Request, res: Response) => {
 
 app.get('/transactions', async (req: Request, res: Response) => {
     try {
-        const transactions = await repository.findAll()
+        const transactions = await repository.findAll(req.query as any)
         return res.status(200).json(transactions)
     } catch (error: any) {
         return res.status(500).json({ message: error.message })

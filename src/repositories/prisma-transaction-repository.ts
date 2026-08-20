@@ -1,7 +1,7 @@
 import { PrismaClient } from '../generated/prisma/client';
 import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 import { ITransactionRepository } from './transaction-repository';
-import { Transaction, CreateTransactionDTO, TransactionType } from '../domain/transaction';
+import { Transaction, CreateTransactionDTO, TransactionType, FilterTransactionsDTO } from '../domain/transaction';
 
 const adapter = new PrismaBetterSqlite3({ url: process.env.DATABASE_URL || 'file:./dev.db' });
 const prisma = new PrismaClient({ adapter });
@@ -13,6 +13,7 @@ export class PrismaTransactionRepository implements ITransactionRepository {
                 description: dto.description,
                 amount: dto.amount,
                 type: dto.type,
+                category: dto.category || 'Geral',
             },
         });
 
@@ -21,18 +22,42 @@ export class PrismaTransactionRepository implements ITransactionRepository {
             title: transaction.description,
             amount: transaction.amount,
             type: transaction.type as TransactionType,
+            category: transaction.category,
             createdAt: transaction.createdAt,
         };
     }
 
-    async findAll(): Promise<Transaction[]> {
-        const transactions = await prisma.transaction.findMany();
+    async findAll(filters?: FilterTransactionsDTO): Promise<Transaction[]> {
+        const where: any = {};
+
+        if (filters) {
+            if (filters.type) {
+                where.type = filters.type;
+            }
+            if (filters.category) {
+                where.category = filters.category;
+            }
+            if (filters.startDate || filters.endDate) {
+                where.createdAt = {};
+                if (filters.startDate) {
+                    where.createdAt.gte = new Date(filters.startDate);
+                }
+                if (filters.endDate) {
+                    where.createdAt.lte = new Date(filters.endDate);
+                }
+            }
+        }
+
+        const transactions = await prisma.transaction.findMany({
+            where: Object.keys(where).length > 0 ? where : undefined,
+        });
 
         return transactions.map((t) => ({
             id: t.id,
             title: t.description,
             amount: t.amount,
             type: t.type as TransactionType,
+            category: t.category,
             createdAt: t.createdAt,
         }));
     }

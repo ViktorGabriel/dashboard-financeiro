@@ -17,5 +17,6 @@ model Transaction {
   description String
   amount      Int
   type        String
+  category    String @default("Geral")
   createdAt   DateTime @default(now())
 }
