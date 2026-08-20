@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Filter, ArrowUpRight, ArrowDownLeft, ReceiptText } from 'lucide-react';
 import { api } from '../services/api';
 import { formatCurrency, formatDate } from '../utils/formatters';
 
@@ -30,64 +31,103 @@ export function TransactionTable({ refreshKey }: TransactionTableProps) {
   const categories = [...new Set(transactions.map((t) => t.category))];
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-4">
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-        <h2 className="text-base font-semibold text-gray-700">Histórico de Transações</h2>
-        <div className="flex gap-2">
-          <select
-            value={typeFilter}
-            onChange={(e) => setTypeFilter(e.target.value)}
-            className="border border-gray-300 text-sm rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">Todos os Tipos</option>
-            <option value="INCOME">Receita</option>
-            <option value="EXPENSE">Despesa</option>
-          </select>
-          <select
-            value={categoryFilter}
-            onChange={(e) => setCategoryFilter(e.target.value)}
-            className="border border-gray-300 text-sm rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">Todas as Categorias</option>
-            {categories.map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
+    <div className="rounded-2xl bg-white p-6 shadow-sm border border-slate-200/80">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 className="text-base font-bold text-slate-900">Histórico de Transações</h2>
+          <p className="text-xs text-slate-400 mt-0.5">Acompanhe todas as movimentações recentes</p>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <div className="relative">
+            <select
+              value={typeFilter}
+              onChange={(e) => setTypeFilter(e.target.value)}
+              className="bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 rounded-xl px-3 py-2 pr-7 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all cursor-pointer appearance-none"
+            >
+              <option value="">Todos os Tipos</option>
+              <option value="INCOME">Receitas</option>
+              <option value="EXPENSE">Despesas</option>
+            </select>
+            <Filter size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+          </div>
+
+          <div className="relative">
+            <select
+              value={categoryFilter}
+              onChange={(e) => setCategoryFilter(e.target.value)}
+              className="bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 rounded-xl px-3 py-2 pr-7 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all cursor-pointer appearance-none"
+            >
+              <option value="">Todas as Categorias</option>
+              {categories.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+            <Filter size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+          </div>
         </div>
       </div>
 
       {transactions.length === 0 ? (
-        <p className="text-sm text-gray-400 text-center py-8">Nenhuma transação encontrada.</p>
+        <div className="text-center py-12 flex flex-col items-center justify-center">
+          <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-300 mb-3">
+            <ReceiptText size={24} />
+          </div>
+          <p className="text-sm font-medium text-slate-600">Nenhuma transação encontrada</p>
+          <p className="text-xs text-slate-400 mt-1">Tente ajustar os filtros ou adicione uma nova movimentação.</p>
+        </div>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-gray-500 border-b border-gray-100">
-                <th className="pb-2 font-medium">Descrição</th>
-                <th className="pb-2 font-medium">Categoria</th>
-                <th className="pb-2 font-medium">Tipo</th>
-                <th className="pb-2 font-medium text-right">Valor</th>
-                <th className="pb-2 font-medium text-right">Data</th>
+              <tr className="text-left text-[11px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100">
+                <th className="pb-3 pl-2">Descrição</th>
+                <th className="pb-3">Categoria</th>
+                <th className="pb-3">Tipo</th>
+                <th className="pb-3 text-right">Valor</th>
+                <th className="pb-3 text-right pr-2">Data</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-slate-50">
               {transactions.map((t) => (
-                <tr key={t.id} className="border-b border-gray-50 hover:bg-gray-50">
-                  <td className="py-2 font-medium text-gray-800">{t.title}</td>
-                  <td className="py-2 text-gray-500">{t.category}</td>
-                  <td className="py-2">
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                <tr key={t.id} className="hover:bg-slate-50/70 transition-colors group">
+                  <td className="py-3.5 pl-2">
+                    <div className="flex items-center gap-3">
+                      <div className={`p-2 rounded-xl text-xs flex items-center justify-center ${
+                        t.type === 'INCOME'
+                          ? 'bg-emerald-50 text-emerald-600'
+                          : 'bg-rose-50 text-rose-600'
+                      }`}>
+                        {t.type === 'INCOME' ? <ArrowUpRight size={15} /> : <ArrowDownLeft size={15} />}
+                      </div>
+                      <span className="font-semibold text-slate-800 group-hover:text-indigo-600 transition-colors">
+                        {t.title}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="py-3.5">
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100/80 text-slate-600 border border-slate-200/50">
+                      {t.category}
+                    </span>
+                  </td>
+                  <td className="py-3.5">
+                    <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${
                       t.type === 'INCOME'
-                        ? 'bg-green-100 text-green-700'
-                        : 'bg-red-100 text-red-700'
+                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200/60'
+                        : 'bg-rose-50 text-rose-700 border border-rose-200/60'
                     }`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${t.type === 'INCOME' ? 'bg-emerald-500' : 'bg-rose-500'}`} />
                       {t.type === 'INCOME' ? 'Receita' : 'Despesa'}
                     </span>
                   </td>
-                  <td className={`py-2 font-bold text-right ${t.type === 'INCOME' ? 'text-green-600' : 'text-red-600'}`}>
+                  <td className={`py-3.5 text-right font-bold tabular-nums ${
+                    t.type === 'INCOME' ? 'text-emerald-600' : 'text-rose-600'
+                  }`}>
                     {t.type === 'INCOME' ? '+' : '-'}{formatCurrency(t.amount)}
                   </td>
-                  <td className="py-2 text-gray-400 text-right">{formatDate(t.createdAt)}</td>
+                  <td className="py-3.5 text-slate-400 text-xs text-right pr-2 tabular-nums">
+                    {formatDate(t.createdAt)}
+                  </td>
                 </tr>
               ))}
             </tbody>
