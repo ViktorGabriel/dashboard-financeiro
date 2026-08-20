@@ -12,23 +12,42 @@
 [![JWT](https://img.shields.io/badge/JWT-Authentication-black?style=for-the-badge&logo=json-web-tokens)](https://jwt.io/)
 [![Vitest](https://img.shields.io/badge/Vitest-Testing-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
 
-Uma aplicação **Fullstack completa e moderna para gestão e análise financeira pessoal e empresarial**. O projeto resolve a complexidade no controle financeiro oferecendo uma interface interativa e responsiva em **React SPA**, acompanhada de uma **API RESTful** segura construída sob os princípios de **Clean Architecture**, com autenticação JWT, persistência relacional com **Prisma ORM** e **SQLite**, métricas de fluxo de caixa e distribuição percentual por categorias com **Recharts**.
+Uma aplicação **Fullstack moderna e de alto padrão para gestão e inteligência financeira pessoal e empresarial**. O projeto combina uma interface com estética **Fintech Minimalista Premium** (inspirada em plataformas como *Stripe*, *Linear* e *Mercury*) com uma **API RESTful robusta** em Node.js construída sob os princípios de **Clean Architecture**, autenticação JWT, persistência com **Prisma ORM**, banco **SQLite** e gráficos interativos com **Recharts**.
+
+---
+
+## 📸 Demonstração Visual (Screenshots)
+
+<div align="center">
+
+### 🌟 Dashboard Principal (Visão Geral & Métricas)
+![Dashboard Preview](docs/screenshots/dashboard-preview.jpg)
+
+<br />
+
+### 🔐 Autenticação & Cadastro
+![Login Preview](docs/screenshots/login-preview.jpg)
+
+</div>
 
 ---
 
 ## ✨ Principais Funcionalidades
 
-### 💻 Frontend (React + Vite + Tailwind CSS)
-- **🔐 Autenticação Completa**: Telas de Login e Cadastro de usuário com validação e persistência do token JWT no `localStorage`.
-- **📊 Dashboard Interativo**:
-  - **Cards de Resumo**: Saldo Atual, Total de Receitas e Total de Despesas em tempo real.
-  - **Gráfico de Fluxo de Caixa Mensal (BarChart)**: Comparativo mês a mês de receitas vs despesas.
-  - **Gráfico de Distribuição por Categoria (DonutChart)**: Percentual de gastos por categoria com tooltips e legendas dinâmicas.
-- **💳 Tabela de Transações**:
-  - Listagem paginada e categorizada com badges de status.
-  - Filtros dinâmicos simultâneos por **Tipo** (Receita/Despesa) e **Categoria**.
-- **➕ Modal de Nova Transação**: Criação rápida de receitas ou despesas com alternador de tipo e conversão automática de valores.
-- **🎨 Design Moderno e Responsivo**: Desenvolvido com Tailwind CSS v4 e ícones da biblioteca Lucide React.
+### 💻 Frontend (React 19 + Vite + Tailwind CSS v4)
+- **🎨 Design System Fintech Premium**:
+  - **Elemento de Assinatura (*Signature Hero Card*)**: Card de saldo total em degradê escuro luminoso (`slate-900`/`indigo-950`), luz ambiente e números de alto contraste.
+  - **Tipografia Moderna**: Família tipográfica **Plus Jakarta Sans** com suporte estrito a números tabulares (`tabular-nums`) para perfeito alinhamento contábil.
+  - **Cabeçalho com Glassmorphism**: Barra superior translúcida com `backdrop-blur`, branding com gradiente índigo-violeta e indicador de usuário ativo em tempo real.
+- **📊 Analytics & Gráficos Interativos**:
+  - **Fluxo de Caixa Mensal (BarChart)**: Comparativo mês a mês de receitas vs despesas com cantos arredondados e *Custom Dark Tooltips*.
+  - **Distribuição por Categorias (DonutChart)**: Percentual de saídas com paleta balanceada e legendas com cálculo percentual dinâmico.
+- **💳 Tabela de Histórico de Transações**:
+  - Filtros dinâmicos simultâneos por **Tipo** (Receitas/Despesas) e **Categoria**.
+  - Linhas com espaçamento respirado, badges elegantes e microinterações táteis no hover.
+- **➕ Modal de Nova Transação**:
+  - Abertura suave com *backdrop-blur* e seletor segmentado moderno (*segmented controls*) entre Receita e Despesa.
+- **🔐 Autenticação Completa**: Telas de Login e Cadastro com validação e persistência do token JWT no `localStorage`.
 
 ### ⚙️ Backend (Node.js + Express + Prisma)
 - **🛡️ Segurança e Multi-usuário**: Hash seguro de senhas com **Bcryptjs**, autenticação stateless com **JWT** e isolamento estrito de dados por `userId`.
@@ -42,11 +61,11 @@ Uma aplicação **Fullstack completa e moderna para gestão e análise financeir
 ## 🚀 Tecnologias Utilizadas
 
 ### Frontend
-- **[React](https://react.dev/)**: Biblioteca componentizada para interface de usuário reativa.
+- **[React 19](https://react.dev/)**: Biblioteca componentizada para interface de usuário reativa.
 - **[Vite](https://vitejs.dev/)**: Bundler moderno e ambiente de desenvolvimento ultrarrápido.
-- **[Tailwind CSS](https://tailwindcss.com/) (v4)**: Framework de estilização utilitário de alta performance.
-- **[Recharts](https://recharts.org/)**: Biblioteca declarativa de gráficos para visualização de dados financeiros.
-- **[Lucide React](https://lucide.dev/)**: Coleção de ícones vetoriais modernos.
+- **[Tailwind CSS (v4)](https://tailwindcss.com/)**: Framework utilitário de alta performance.
+- **[Recharts](https://recharts.org/)**: Visualização de dados declarativa e customizada.
+- **[Lucide React](https://lucide.dev/)**: Ícones vetoriais elegantes e consistentes.
 - **[Axios](https://axios-http.com/)**: Cliente HTTP com interceptors automáticos de Bearer Token.
 
 ### Backend
@@ -141,6 +160,11 @@ npx vitest run
 
 ```text
 dashboard-financeiro/
+├── docs/                               # Documentação e capturas de tela
+│   └── screenshots/                    # Imagens do Dashboard e Auth
+│       ├── dashboard-preview.jpg
+│       └── login-preview.jpg
+│
 ├── prisma/
 │   ├── migrations/                     # Histórico de migrações SQL do banco
 │   └── schema.prisma                   # Modelos de dados (User, Transaction)
@@ -173,27 +197,28 @@ dashboard-financeiro/
 ├── frontend/                           # FRONTEND (React SPA + Vite)
 │   ├── src/
 │   │   ├── components/                 # Componentes Visuais do Dashboard
-│   │   │   ├── Header.tsx              # Barra de navegação com dados do usuário e ações
-│   │   │   ├── SummaryCards.tsx        # Cards de Saldo, Receitas e Despesas
-│   │   │   ├── CashFlowChart.tsx       # Gráfico de barras com Recharts
+│   │   │   ├── Header.tsx              # Barra de navegação com glassmorphism e ações
+│   │   │   ├── SummaryCards.tsx        # Signature Hero Card e Cards de Apoio
+│   │   │   ├── CashFlowChart.tsx       # Gráfico de barras com Tooltip Dark Customizado
 │   │   │   ├── CategoryPieChart.tsx    # Gráfico Donut de categorias com Recharts
 │   │   │   ├── TransactionTable.tsx    # Tabela de extrato com filtros interativos
-│   │   │   └── NewTransactionModal.tsx # Modal de criação de transações
+│   │   │   └── NewTransactionModal.tsx # Modal com segmented control e backdrop-blur
 │   │   ├── contexts/
 │   │   │   └── AuthContext.tsx         # Gerenciamento de estado de login, user e token
 │   │   ├── pages/
-│   │   │   ├── Login.tsx               # Tela de Login
+│   │   │   ├── Login.tsx               # Tela de Login com nova identidade
 │   │   │   └── Register.tsx            # Tela de Cadastro
 │   │   ├── services/
 │   │   │   └── api.ts                  # Instância Axios com interceptor de autenticação
 │   │   ├── utils/
 │   │   │   └── formatters.ts           # Formatadores de moeda (BRL) e datas (PT-BR)
-│   │   ├── App.tsx                     # Roteamento condicional por autenticação
-│   │   ├── index.css                   # Diretivas e estilizações do Tailwind CSS
+│   │   ├── App.tsx                     # Layout principal e roteamento condicional
+│   │   ├── index.css                   # Fontes (Plus Jakarta Sans), tabular-nums e Tailwind
 │   │   └── main.tsx                    # Ponto de entrada React
 │   ├── package.json
 │   └── vite.config.ts
 │
+├── frontend_desing_skill.md            # Diretrizes de design e padrões visuais do projeto
 ├── package.json
 ├── tsconfig.json
 └── README.md
@@ -410,3 +435,4 @@ Este projeto está sob a licença [ISC](LICENSE).
 ---
 
 Feito com ☕ e código limpo por [Viktor Gabriel](https://github.com/ViktorGabriel).
+
